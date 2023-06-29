@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Iniciar Sesión</title>
+    <style>
+        body {
+            background-image: url("/static/img/21601.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Iniciar Sesión</h1>
+        <form action="{{ url_for('bienvenida') }}" method="POST">
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="mail" required>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="contra" required>
+            <label for="tipo">Tipo de cuenta:</label>
+            <select id="tipo" name="tipo">
+                <option value="padre">Padre</option>
+                <option value="preceptor">Preceptor</option>
+            </select>
+            <input type="submit" value="Iniciar Sesión">
+        </form>
+    </div>
+</body>
+</html>

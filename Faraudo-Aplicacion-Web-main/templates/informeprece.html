@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Informe Preceptor</title>
+  <style>
+    body {
+      background-image: url('/static/img/21601.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      text-align: center;
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .header {
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      margin: 20px;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">Informe de Asistencias y Faltas</div>
+    <form method="post" action="/consinformeprece">
+      <label for="cursoid">Seleccione un curso:</label>
+      <select id="cursoid" name="cursoid">
+        {% for curso in cursos %}
+          <option value="{{ curso.id }}">{{ curso.id }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit">Mostrar Informe</button>
+    </form>
+
+    {% if curso %}
+      <h2>Curso: {{ curso.id }}</h2>
+      <table>
+        <tr>
+          <th>Estudiante</th>
+          <th>Asistencias Aula</th>
+          <th>Asistencias Educación Física</th>
+          <th>Inasistencias Aula Justificadas</th>
+          <th>Inasistencias Aula Injustificadas</th>
+          <th>Inasistencias Educación Física Justificadas</th>
+          <th>Inasistencias Educación Física Injustificadas</th>
+          <th>Justificaciones Aula</th>
+          <th>Justificaciones Educación Física</th>
+          <th>Total Inasistencias</th>
+        </tr>
+        {% for estudiante in informe %}
+          <tr>
+            <td>{{ estudiante.estudiante.nombre }} {{ estudiante.estudiante.apellido }}</td>
+            <td>{{ estudiante.asistencias_aula }}</td>
+            <td>{{ estudiante.asistencias_fisica }}</td>
+            <td>{{ estudiante.inasistencias_aula_justificadas }}</td>
+            <td>{{ estudiante.inasistencias_aula_injustificadas }}</td>
+            <td>{{ estudiante.inasistencias_fisica_justificadas }}</td>
+            <td>{{ estudiante.inasistencias_fisica_injustificadas }}</td>
+            <td>{{ estudiante.justificaciones_aula }}</td>
+            <td>{{ estudiante.justificaciones_fisica }}</td>
+            <td>{{ estudiante.total_inasistencias }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+  </div>
+</body>
+</html>

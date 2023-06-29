@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro de Asistencia</title>
+    <style>
+        body {
+            background-image: url('/static/img/21601.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        form {
+            width: 400px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        select, input[type="number"], input[type="date"], input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        h3 {
+            margin-bottom: 10px;
+        }
+
+        div {
+            margin-bottom: 15px;
+        }
+
+        input[type="checkbox"] {
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <h1>Registro de Asistencia</h1>
+    <form method="POST" action="/registrar_asistencia">
+        <label for="cursoid">Seleccione un curso:</label>
+        <select id="cursoid" name="cursoid">
+          {% for curso in cursos %}
+            <option value="{{ curso.id }}">{{ curso.id }}</option>
+          {% endfor %}
+        </select>
+        <label for="clase">Clase:</label>
+        <select id="clase" name="clase" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+        </select>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" required>
+
+        <h3>Asistencia de estudiantes:</h3>
+        {% if estudiantes %}
+            {% for estudiante in estudiantes %}
+                <div>
+                    <label for="asistio-{{ estudiante.id }}">Asistió - {{ estudiante.apellido }},{{ estudiante.nombre}}</label>
+                    <input type="text" id="asistio-{{ estudiante.id }}" name="asistio-{{ estudiante.id }}" placeholder="s/n">
+                    <input type="text" id="justificacion-{{ estudiante.id }}" name="justificacion-{{ estudiante.id }}" placeholder="Justificación">
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No se encontraron estudiantes en el curso seleccionado.</p>
+        {% endif %}
+
+        <input type="submit" value="Guardar Asistencia">
+    </form>
+    <br> <br> 
+</body>
+<div>
+    <a href="{{ url_for('logout') }}">Cerrar Sesión</a>
+</div>
+</html>
