@@ -75,11 +75,11 @@
     <h1>Registro de Asistencia</h1>
     <form method="POST" action="/registrar_asistencia">
         <label for="cursoid">Seleccione un curso:</label>
-        <select id="cursoid" name="cursoid">
-          {% for curso in cursos %}
-            <option value="{{ curso.id }}">{{ curso.id }}</option>
-          {% endfor %}
-        </select>
+      <select id="cursoid" name="cursoid">
+        {% for curso in cursos %}
+          <option value="{{ curso.id }}">{{ curso.id }}</option>
+        {% endfor %}
+      </select>
         <label for="clase">Clase:</label>
         <select id="clase" name="clase" required>
             <option value="1">1</option>
@@ -93,8 +93,8 @@
         {% if estudiantes %}
             {% for estudiante in estudiantes %}
                 <div>
-                    <label for="asistio-{{ estudiante.id }}">Asistió - {{ estudiante.apellido }},{{ estudiante.nombre}}</label>
-                    <input type="text" id="asistio-{{ estudiante.id }}" name="asistio-{{ estudiante.id }}" placeholder="s/n">
+                    <label for="estudiante-{{ estudiante.id }}">Asistió - {{ estudiante.apellido }}, {{ estudiante.nombre }}</label>
+                    <input type="checkbox" id="estudiante-{{ estudiante.id }}" name="estudiante-{{ estudiante.id }}" value="on">
                     <input type="text" id="justificacion-{{ estudiante.id }}" name="justificacion-{{ estudiante.id }}" placeholder="Justificación">
                 </div>
             {% endfor %}
