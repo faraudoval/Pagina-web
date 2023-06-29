@@ -1,0 +1,63 @@
+<!-- COMO SOLO SON LAS 3 FUNCIONALIDADES, AL APRETAR EL BOTON, NO HARA NADA-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bienvenido, {{ datos[0] }} {{ datos[1] }}</title>
+    <style>
+        body {
+            background-image: url("/static/img/21601.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            background-color: white;
+            opacity: 0.9;
+            border-radius: 5px;
+            margin-top: 100px;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenido, {{ datos[0] }} {{ datos[1] }}</h1>
+        <p>Tipo de cuenta: {{ datos[2] }}</p>
+
+        {% if datos[2] == 'padre' %}
+        <h2>Consultar Inasistencias del Hijo</h2>
+        <p>Muestra fecha, tipo de clase y justificación (si la inasistencia está justificada) de cada inasistencia, y al final el cómputo total de inasistencias.</p>
+        <button class="btn" disabled>Consultar Inasistencias</button>
+        {% endif %}
+
+        <div style="margin-top: 20px;">
+            <a href="{{ url_for('logout') }}">Cerrar Sesión</a>
+        </div>
+    </div>
+</body>
+</html>

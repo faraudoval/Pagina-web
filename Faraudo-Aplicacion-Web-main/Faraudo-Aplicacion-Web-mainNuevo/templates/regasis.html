@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro de Asistencia por Curso - {{ curso.nombre }}</title>
+    <style>
+        body {
+            background-image: url('/static/img/21601.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registro de Asistencia por Curso - {{ curso.nombre }}</h1>
+    <form method="post" action="{{ url_for('asisreg') }}">
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha">
+        <br>
+        <br>
+        <table>
+            <tr>
+                <th>Estudiante</th>
+                <th>Tipo de Clase</th>
+                <th>Asistencia</th>
+                <th>Justificación</th>
+            </tr>
+            {% for i in r %}
+            <tr>
+                <td>{{ estudiantes[i].apellido }}, {{ estudiantes[i].nombre }}</td>
+                <td>
+                    <select name="tipo{{ i }}">
+                        <option value="1">Aula</option>
+                        <option value="2">Educación Física</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="asis{{ i }}">
+                        <option value="s">Sí</option>
+                        <option value="n">No</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="justi{{ i }}" placeholder="Justificación">
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Guardar Asistencia">
+    </form>
+    <br> <br>
+</div>
+</div>
+    <a href="{{ url_for('logout') }}">Cerrar Sesión</a>
+</body>
+</html>

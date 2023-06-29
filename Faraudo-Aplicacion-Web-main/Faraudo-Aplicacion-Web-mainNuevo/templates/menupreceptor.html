@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menú Preceptor</title>
+    <style>
+        body {
+            background-image: url('/static/img/21601.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        
+        .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .menu h1 {
+            margin: 0;
+        }
+
+        .menu a {
+            margin-top: 10px;
+            padding: 8px 12px;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .menu a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <h1>Menú Preceptor</h1>
+    </div>
+    <br><br>
+    <div class="menu">
+        <h2>Registrar Asistencia</h2>
+        <a href="{{ url_for('regasis') }}">Registrar Asistencia</a>
+    </div>
+    <br><br>
+    <div class="menu">
+        <h2>Informe con detalles</h2>
+        <a href="{{ url_for('informeprece') }}">Ver informe</a>
+    </div>
+    <br><br>
+    <div class="menu">
+        <h2>Listado de Asistencia</h2>
+        <button class="btn" disabled>Ver listado</button>
+    </div>
+    <br><br>
+    
+    <br><br>
+    <div class="menu">
+        <a href="{{ url_for('logout') }}">Cerrar Sesión</a>
+    </div>
+</body>
+</html>
+
