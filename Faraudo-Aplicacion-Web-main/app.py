@@ -96,7 +96,7 @@ def consinformeprece():
                                 asistencias_aula += 1
                             else:
                                 if asistencia.asistio == "n":
-                                    if asistencia.justificacion !=None:
+                                    if asistencia.justificacion is not None:
                                         inasistencias_aula_justificadas += 1
                                     else:
                                         inasistencias_aula_injustificadas += 1
@@ -105,7 +105,7 @@ def consinformeprece():
                                 asistencias_fisica += 1
                             else:
                                 if asistencia.asistio == "n":
-                                    if asistencia.justificacion!=None:
+                                    if asistencia.justificacion is not None:
                                         inasistencias_fisica_justificadas += 1
                                     else:
                                         inasistencias_fisica_injustificadas += 1
@@ -131,27 +131,29 @@ def consinformeprece():
 @app.route('/registrar_asistencia', methods=["GET", "POST"])
 def registrar_asistencia():
     preceptor_id = session.get('preceptor_id')
-    
+
     if preceptor_id:
         preceptor = Preceptor.query.get(preceptor_id)
-        
+
         if request.method == "POST":
             curso_id = request.form.get('cursoid')
             clase_id = int(request.form['clase'])
             fecha = request.form['fecha']
-            
+
             if curso_id:
                 curso = Curso.query.filter_by(id=curso_id).first()
-                
+
                 if curso:
-                    estudiantes = curso.estudiante
+                    estudiantes = curso.estudiante  
+
                     asistencia = []
 
                     for estudiante in estudiantes:
                         estudiante_id = estudiante.id
-                        asistio = request.form.get(f'asistio-{estudiante_id}', '').lower()
+                        asistio = "s" if request.form.get(f'estudiante-{estudiante_id}') == 'on' else 'n'
                         justificacion = request.form.get(f'justificacion-{estudiante_id}', '')
-
+                        if justificacion == '':
+                            justificacion = None
                         asistencia.append(
                             Asistencia(
                                 fecha=fecha,
@@ -169,7 +171,7 @@ def registrar_asistencia():
                     return render_template('registrar_asistencia.html', cursos=preceptor.cursos, estudiantes=estudiantes)
 
         return render_template('registrar_asistencia.html', cursos=preceptor.cursos)
-    
+
     flash('Acceso denegado. Inicia sesión como preceptor.')
     return redirect('/login')
 if __name__ == '__main__': 
